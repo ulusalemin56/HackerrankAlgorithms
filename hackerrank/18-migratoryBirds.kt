@@ -1,25 +1,20 @@
 package hackerrank
 
 fun migratoryBirds(arr: Array<Int>): Int {
-    var result = arr[0]
-    var preCount = 0
-    var count = 0
-    for (i in arr.indices) {
-        for (j in (i + 1) until arr.size) {
-            if (arr[i] == arr[j]) {
-                count ++
-            }
-        }
-        if (count > preCount) {
-            result = arr[i]
-            preCount = count
-        } else if (count == preCount && arr[i] < result) {
-            result = arr[i]
-            preCount = count
-        }
-        count = 0
+    val countOfBirds = arrayOf(0, 0, 0, 0, 0, 0)
+    arr.forEach {
+        countOfBirds[it] += 1
     }
-    return result
+
+    var maxIndex = 0
+    var max = 0
+    countOfBirds.forEachIndexed { index, element ->
+        if (element > max) {
+            max = element
+            maxIndex = index
+        }
+    }
+    return maxIndex
 }
 
 fun main() {
